@@ -1,0 +1,194 @@
+/* ============================= */
+/* 📱 RESPONSIVE SMARTPHONE */
+/* ============================= */
+.dashboard-container {
+  width: 90%;           /* adatta automaticamente allo schermo */
+  max-width: 900px;     /* mai più grande di 900px su desktop */
+  margin: 40px auto;
+  padding: 30px;
+  background: #001c37;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  box-sizing: border-box; /* importante per padding */
+}
+
+/* Per smartphone più piccolo */
+@media (max-width: 768px) {
+  .dashboard-container {
+    width: 95%;        /* quasi tutta la larghezza */
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+
+
+  /* Nomi squadre in verticale */
+  .team-names {
+    flex-direction: column;
+  }
+
+  .team-input input {
+    font-size: 1.1rem;
+  }
+
+  /* Controlli punteggio in verticale */
+  .score-controls-horizontal {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .score-team-horizontal {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  /* Punteggio più grande */
+  .score-display {
+    font-size: 2.2rem;
+    min-width: 80px;
+  }
+
+  /* Bottoni più grandi per touch */
+  button.btn-plus,
+  button.btn-minus {
+    padding: 14px 20px;
+    font-size: 1.1rem;
+  }
+
+  /* Logout full width */
+  button.logout {
+    width: 100%;
+    text-align: center;
+  }
+
+}
+
+/* Pulsante Logout */
+button.logout {
+  background: #ff3c3c;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+button.logout:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(255,60,60,0.5);
+}
+
+/* Nomii squadre */
+.team-names {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.team-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.team-input label {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.team-input input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+}
+
+/* Radio cuffie */
+.color-select {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.color-select label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.color-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+
+/* Score orizzontale */
+.score-controls-horizontal {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 40px;
+}
+
+.score-team-horizontal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.score-team-horizontal span {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.score-display {
+  min-width: 60px;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  padding: 10px 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* + verde / - rosso */
+button.btn-plus {
+  background: #00ff00;
+  color: #001c37;
+  font-weight: 700;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+button.btn-plus:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0,255,0,0.5);
+}
+
+button.btn-minus {
+  background: #ff0000;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+button.btn-minus:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(255,0,0,0.5);
+}

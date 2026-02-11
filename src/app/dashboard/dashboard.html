@@ -1,0 +1,63 @@
+<div class="dashboard-container">
+
+  <!-- Logout -->
+  <button class="btn logout" (click)="logout()">Logout</button>
+
+  <!-- Nomi squadre e scelta cuffia -->
+  <div class="team-names">
+    <!-- Squadra Casa -->
+    <div class="team-input">
+      <label for="teamLocal">Team Casa</label>
+      <input #teamLocalInput type="text" id="teamLocal" placeholder="Nome squadra locale">
+
+      <!-- Radio cuffia -->
+      <div class="color-select">
+        <label>
+          <input type="radio" name="localColor" value="azzurro" checked (change)="setLocalColor('azzurro')">
+          <span class="color-box" style="background:#30aeea;"></span> Azzurro
+        </label>
+        <label>
+          <input type="radio" name="localColor" value="bianco" (change)="setLocalColor('bianco')">
+          <span class="color-box" style="background:#ffffff;"></span> Bianco
+        </label>
+      </div>
+    </div>
+
+    <!-- Squadra Ospite -->
+    <div class="team-input">
+      <label for="teamGuest">Team Ospite</label>
+      <input #teamGuestInput type="text" id="teamGuest" placeholder="Nome squadra ospite">
+
+      <!-- Mostra cuffia ospiti automaticamente -->
+      <div class="color-select">
+        <span class="color-box" [style.background]="match.firstColor=='azzurro' ? '#ffffff' : '#30aeea'"></span> Cuffia Ospiti
+      </div>
+    </div>
+  </div>
+
+  <!-- Punteggio tutto in orizzontale -->
+  <div class="score-controls-horizontal">
+    <!-- Casa -->
+    <div class="score-team-horizontal">
+      <span>Casa</span>
+      <div class="score-display" [style.background]="match.firstColor=='azzurro' ? '#30aeea' : '#ffffff'"
+           [style.color]="match.firstColor=='azzurro' ? '#001c37' : '#30aeea'">
+        {{ match.firstScore }}
+      </div>
+      <button class="btn-plus" (click)="scoreFirst(1)">+1</button>
+      <button class="btn-minus" (click)="scoreFirst(-1)">-1</button>
+    </div>
+
+    <!-- Ospiti -->
+    <div class="score-team-horizontal">
+      <span>Ospiti</span>
+      <div class="score-display" [style.background]="match.firstColor=='azzurro' ? '#ffffff' : '#30aeea'"
+           [style.color]="match.firstColor=='azzurro' ? '#30aeea' : '#001c37'">
+        {{ match.secondScore }}
+      </div>
+      <button class="btn-plus" (click)="scoreSecond(1)">+1</button>
+      <button class="btn-minus" (click)="scoreSecond(-1)">-1</button>
+    </div>
+  </div>
+
+</div>

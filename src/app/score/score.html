@@ -1,0 +1,33 @@
+<div class="screen">
+  <div class="scoreboard-horizontal">
+
+    <!-- Squadra Locale -->
+    <div class="team local">
+      <img class="logo" src="slprg.png" alt="Logo Local">
+      <span class="team-name">Stilelibero Preganziol</span>
+    </div>
+    <div class="cap-indicator"
+     [ngClass]="localColor">
+</div>
+
+    <!-- Punteggio centrale -->
+    <div class="score">
+      <span id="score-local">{{ scoreCasa }}</span>
+      <span class="dash">|</span>
+      <span id="score-guest">{{ scoreOspiti }}</span>
+    </div>
+
+    
+
+    <div class="cap-indicator"
+     [ngClass]="localColor === 'azzurro' ? 'bianco' : 'azzurro'">
+</div>
+    <!-- Squadra Ospite -->
+    <div class="team guest">
+       <span class="team-name">Rari Nantes Trento</span>
+      <img class="logo" src="rarinantestrento.jpg" alt="Logo Guest">
+     
+    </div>
+
+</div>
+
