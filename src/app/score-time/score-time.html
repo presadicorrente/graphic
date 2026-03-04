@@ -27,5 +27,8 @@
       T {{ period }}°
     </div>
 
+    <div class="time-display">
+      {{ ((seconds-seconds%60) / 60) | number:'1.0-0' }}:{{ seconds%60 | number:'2.0' }}
+    </div>
   </div>
 </div>

@@ -6,6 +6,7 @@ import { io } from "socket.io-client";
   providedIn: 'root',
 })
 export class DasboardSocket {
+
   constructor() {}
   connect() : Observable<any> {
     // Socket.io connection logic can be implemented here
@@ -16,6 +17,12 @@ export class DasboardSocket {
         console.log("Punteggio aggiornato ricevuto: ", JSON.stringify(data));
         observer.next(data);
       });
+
+      socket.on('timerUpdate', (data: any) => {
+        console.log("Aggiornamento timer ricevuto: ", JSON.stringify(data));
+        observer.next(data);
+      });
+      
       return () => {
         socket.disconnect();
       };

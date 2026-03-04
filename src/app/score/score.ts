@@ -14,6 +14,7 @@ export class Score implements OnInit, OnDestroy {
   scoreCasa: number = 0;
   scoreOspiti: number = 0;
   localColor: 'azzurro' | 'bianco' = 'azzurro'; // colore cuffia squadra casa
+  period: number = 1; // periodo di gioco
 
   private socketSub?: Subscription;
 
@@ -26,11 +27,11 @@ export class Score implements OnInit, OnDestroy {
     this.scoreCasa = data.firstScore;
     this.scoreOspiti = data.secondScore;
     this.localColor = data.firstColor;
-
+    this.period = data.period;
+    
     this.cdr.detectChanges();
   });
 }
-
 
   ngOnDestroy(): void {
     this.socketSub?.unsubscribe();

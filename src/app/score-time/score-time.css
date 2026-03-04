@@ -9,7 +9,7 @@
   align-items: center;
   gap: 15px;
 
-  max-width: 700px;
+  max-width: 780px;
   padding:  10px;
 
   background: linear-gradient(90deg, #001c37, #30aeea);
@@ -70,6 +70,21 @@
 
 
 .period-display {
+  display: flex;
+  align-items: center;
+
+  font-size: 2rem;
+  font-weight: 900;
+
+  background: white;
+  color: #30aeea;
+
+  padding: 5px 15px;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
+.time-display {
   display: flex;
   align-items: center;
 

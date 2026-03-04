@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DasboardHttp } from './dasboard-http';
+import { DashboardHttp } from './dasboard-http';
 
 describe('DasboardHttp', () => {
-  let service: DasboardHttp;
+  let service: DashboardHttp;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DasboardHttp);
+    service = TestBed.inject(DashboardHttp);
   });
 
   it('should be created', () => {
