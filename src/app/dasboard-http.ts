@@ -11,6 +11,8 @@ export class DashboardHttp {
    
   constructor(private http : HttpClient) {}
 
+  
+
   updateMatch(first: number, second: number, firstColor: string, secondColor: string, period: number) {
     const body = {
       firstScore: first,
@@ -19,7 +21,7 @@ export class DashboardHttp {
       secondColor,
       period
     };
-    return this.http.post('http://localhost:3000/scores', body);
+    return this.http.post('https://backendgraphic.onrender.com/scores', body);
   }
 
   getFirstScore(): number {
@@ -30,13 +32,13 @@ export class DashboardHttp {
   }
 
   getResetTimer() {
-    return this.http.get('http://localhost:3000/resetTimer');
+    return this.http.get('https://backendgraphic.onrender.com/resetTimer');
   }
   getPlayPauseTimer(play: boolean, seconds: number) {
     if (play) {
-      return this.http.get('http://localhost:3000/startTimer?seconds=' + seconds);
+      return this.http.get('https://backendgraphic.onrender.com/startTimer?seconds=' + seconds);
     } else {
-      return this.http.get('http://localhost:3000/stopTimer?seconds=' + seconds);
+      return this.http.get('https://backendgraphic.onrender.com/stopTimer?seconds=' + seconds);
     }
   }
 }

@@ -11,7 +11,7 @@ export class DasboardSocket {
   connect() : Observable<any> {
     // Socket.io connection logic can be implemented here
     return new Observable<any>((observer) => {
-      let socket = io('http://localhost:3000');
+      let socket = io('https://backendgraphic.onrender.com');
       
       socket.on('scoreUpdate', (data: any) => {
         console.log("Punteggio aggiornato ricevuto: ", JSON.stringify(data));

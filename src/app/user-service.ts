@@ -7,7 +7,7 @@ import { Observable, tap } from 'rxjs';
 })
 export class UserService {
   private token: string = '';
-  public url: string = 'http://localhost:3000';
+  public url: string = 'https://backendgraphic.onrender.com';
   
   constructor(private http: HttpClient ) {
     console.log('User service instantiated');
