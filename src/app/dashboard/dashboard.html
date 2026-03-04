@@ -76,9 +76,8 @@
   <div class="timer-controls">
     <button class="btn" (click)="playPauseTimer()">{{ match.play ? 'Pausa' : 'Play' }}</button>
     <button class="btn" (click)="resetTimer()">Reset</button>
-    <div>
+    
       <span>{{ ((match.seconds-match.seconds%60) / 60) | number:'1.0-0' }}:{{ match.seconds%60 | number:'2.0' }}</span>
-    </div>
   </div>
 
 </div>

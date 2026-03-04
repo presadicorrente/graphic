@@ -103,7 +103,9 @@ export class Dashboard {
 
   start() {
     this.intervalId = setInterval(() => {
-      this.match.seconds--;
+      if (this.match.seconds > 0) {
+        this.match.seconds--;
+      }
       this.cdr.detectChanges();
     }, 1000);
   }
