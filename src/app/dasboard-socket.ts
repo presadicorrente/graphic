@@ -6,12 +6,14 @@ import { io } from "socket.io-client";
   providedIn: 'root',
 })
 export class DasboardSocket {
+  private link = 'https://backendgraphic.onrender.com';
+  private link2 = 'http://localhost:3000';
 
   constructor() {}
   connect() : Observable<any> {
     // Socket.io connection logic can be implemented here
     return new Observable<any>((observer) => {
-      let socket = io('https://backendgraphic.onrender.com');
+      let socket = io(this.link);
       
       socket.on('scoreUpdate', (data: any) => {
         console.log("Punteggio aggiornato ricevuto: ", JSON.stringify(data));

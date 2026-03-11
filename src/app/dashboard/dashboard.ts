@@ -11,14 +11,14 @@ import { DashboardHttp } from '../dasboard-http'; // <-- importa il servizio
 })
 export class Dashboard {
 
-  match = {
-    firstScore: 0,
-    secondScore: 0,
-    period : 1,
-    firstColor: 'azzurro',
-    secondColor: 'bianco',
-    seconds: 8*60, // 8 minuti in secondi
-    play: false
+
+
+  match : Match = {
+    team1: {name : 'Team Casa', score: 0, color: 'azzurro'},
+    team2: {name : 'Team Ospiti', score: 0, color: 'bianco'},
+    period: 1,
+    seconds: 8*60,
+    timeRunning: false
   };
   intervalId: any;
 
@@ -28,11 +28,22 @@ export class Dashboard {
     console.log('Logout eseguito');
   }
 
+  ngOnInit(): void {
+    const rest = this.dashboardHttp.getMatch();
+    rest.subscribe(response => {
+      this.match = response as Match;
+      console.log('Match retrieved successfully:', this.match);
+      this.cdr.detectChanges();
+    }, error => {
+      console.error('Error retrieving match:', error);
+    });
+  }
+
   setLocalColor(color: string) {
-    this.match.firstColor = color;
+    this.match.team1.color = color;
     // chiama la funzione dal servizio
     
-    const rest = this.dashboardHttp.updateMatch(this.match.firstScore, this.match.secondScore, this.match.firstColor, this.match.secondColor, this.match.period);
+    const rest = this.dashboardHttp.updateMatch(this.match);
     rest.subscribe(response => {
       console.log('Scores updated successfully:', response);
     }, error => {
@@ -42,9 +53,9 @@ export class Dashboard {
   
 
   scoreFirst(value: number) {
-    this.match.firstScore += value;
-    if (this.match.firstScore < 0) this.match.firstScore = 0;
-    const rest = this.dashboardHttp.updateMatch(this.match.firstScore, this.match.secondScore, this.match.firstColor, this.match.secondColor, this.match.period);
+    this.match.team1.score += value;
+    if (this.match.team1.score < 0) this.match.team1.score = 0;
+    const rest = this.dashboardHttp.updateMatch(this.match);
     rest.subscribe(response => {
       console.log('Scores updated successfully:', response);
     }, error => {
@@ -53,9 +64,9 @@ export class Dashboard {
   }
 
   scoreSecond(value: number) {
-    this.match.secondScore += value;
-    if (this.match.secondScore < 0) this.match.secondScore = 0;
-    const rest = this.dashboardHttp.updateMatch(this.match.firstScore, this.match.secondScore, this.match.firstColor, this.match.secondColor, this.match.period );
+    this.match.team2.score += value;
+    if (this.match.team2.score < 0) this.match.team2.score = 0;
+    const rest = this.dashboardHttp.updateMatch(this.match);
     rest.subscribe(response => {
       console.log('Scores updated successfully:', response);
     }, error => {
@@ -68,7 +79,7 @@ export class Dashboard {
     // Implementa la logica per impostare il periodo
     console.log('Periodo impostato a:', value);
     if(this.match.period >= 1 && this.match.period <=4 ) {
-      const rest = this.dashboardHttp.updateMatch(this.match.firstScore, this.match.secondScore, this.match.firstColor, this.match.secondColor, this.match.period);
+      const rest = this.dashboardHttp.updateMatch(this.match);
       rest.subscribe(response => {
         console.log('Scores updated successfully:', response);
       }, error => {
@@ -79,7 +90,7 @@ export class Dashboard {
 
   resetTimer() {
     this.reset();
-    this.dashboardHttp.getPlayPauseTimer(false, 6*80).subscribe(response => {
+    this.dashboardHttp.getResetTimer().subscribe(response => {
       console.log('Timer reset successfully:', response);
     }, error => {
       console.error('Error resetting timer:', error);
@@ -87,14 +98,14 @@ export class Dashboard {
   }
 
   playPauseTimer() {
-    this.match.play = !this.match.play;
-    if (this.match.play) {
+    this.match.timeRunning = !this.match.timeRunning;
+    if (this.match.timeRunning) {
       console.log('Timer avviato');
       this.start();
     }else{
       this.stop();
     }
-      this.dashboardHttp.getPlayPauseTimer(this.match.play, this.match.seconds).subscribe(response => {
+      this.dashboardHttp.getPlayPauseTimer(this.match.timeRunning, this.match.seconds).subscribe(response => {
         console.log('Timer play/pause toggled successfully:', response);
       }, error => {
         console.error('Error toggling timer play/pause:', error);

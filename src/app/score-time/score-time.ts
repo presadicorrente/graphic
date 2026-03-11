@@ -11,49 +11,33 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./score-time.css']
 })
 export class ScoreTime implements OnInit, OnDestroy {
-  scoreCasa: number = 0;
-  scoreOspiti: number = 0;
-  localColor: 'azzurro' | 'bianco' = 'azzurro'; // colore cuffia squadra casa
-  period: number = 1; // periodo di gioco
-  seconds: number = 8*60; // secondi rimanenti
-  play : boolean = false; // stato del timer
-  intervalId: any;
+  match : Match = {
+    team1: {name : 'Team Casa', score: 0, color: 'azzurro'},
+    team2: {name : 'Team Ospiti', score: 0, color: 'bianco'},
+    period: 1,
+    seconds: 8*60,
+    timeRunning: false
+  };
+  secondi: number = 8*60;
+  running: boolean = false;
 
   private socketSub?: Subscription;
+  intervalId: any;
+  dashboardHttp: any;
   
 
   constructor(private socketService: DasboardSocket, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
   this.socketSub = this.socketService.connect().subscribe((data: any) => {
-    console.log("Score update:", data);
+    this.match = data;
+    this.secondi = data.seconds;
+    if(data.timeRunning) {
+      this.start()
+    }else{
+      this.stop();
+    }
 
-    if (data.firstScore !== undefined) {
-      this.scoreCasa = data.firstScore;
-    }
-    if (data.secondScore !== undefined) {
-      this.scoreOspiti = data.secondScore;
-    }
-    if (data.firstColor) {
-      this.localColor = data.firstColor;
-    }
-    if (data.period) {
-      this.period = data.period;
-    }
-    if (data.time !== undefined) {
-      console.log("Aggiornamento secondi: ", data.time);
-      if (this.seconds !== data.time) {
-        this.seconds = data.time;
-      }
-    }
-    if (data.play !== undefined) {
-      this.play = data.play;
-      if (this.play) {
-        this.start();
-      } else {
-        this.stop();
-     }
-    }
     this.cdr.detectChanges();
   });
 }
@@ -65,7 +49,7 @@ export class ScoreTime implements OnInit, OnDestroy {
   start(){
     if (!this.intervalId) {
       this.intervalId = setInterval(() => {
-        this.seconds--;
+        this.secondi--;
         this.cdr.detectChanges();
       }, 1000);
     }
@@ -79,7 +63,7 @@ export class ScoreTime implements OnInit, OnDestroy {
 
   reset() {
     this.stop();
-    this.seconds = 8*60;
+    this.secondi = 8*60;
     this.cdr.detectChanges();
   }
 }

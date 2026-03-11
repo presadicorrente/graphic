@@ -6,16 +6,16 @@
       <span class="team-name">Stilelibero Preganziol</span>
     </div>
 
-    <div class="cap-indicator" [ngClass]="localColor"></div>
+    <div class="cap-indicator" [ngClass]="match.team1.color"></div>
 
     <div class="score">
-      <span>{{ scoreCasa }}</span>
+      <span>{{ match.team1.score }}</span>
       <span class="dash">|</span>
-      <span>{{ scoreOspiti }}</span>
+      <span>{{ match.team2.score }}</span>
     </div>
 
     <div class="cap-indicator"
-      [ngClass]="localColor === 'azzurro' ? 'bianco' : 'azzurro'">
+      [ngClass]="match.team1.color === 'azzurro' ? 'bianco' : 'azzurro'">
     </div>
 
     <div class="team guest">
@@ -24,11 +24,11 @@
     </div>
 
     <div class="period-display">
-      T {{ period }}°
+      T {{ match.period }}°
     </div>
 
     <div class="time-display">
-      {{ ((seconds-seconds%60) / 60) | number:'1.0-0' }}:{{ seconds%60 | number:'2.0' }}
+      {{ ((secondi-secondi%60) / 60) | number:'1.0-0' }}:{{ secondi%60 | number:'2.0' }}
     </div>
   </div>
 </div>

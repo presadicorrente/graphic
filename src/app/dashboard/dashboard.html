@@ -30,7 +30,7 @@
 
       <!-- Mostra cuffia ospiti automaticamente -->
       <div class="color-select">
-        <span class="color-box" [style.background]="match.firstColor=='azzurro' ? '#ffffff' : '#30aeea'"></span> Cuffia Ospiti
+        <span class="color-box" [style.background]="match.team1.color=='azzurro' ? '#ffffff' : '#30aeea'"></span> Cuffia Ospiti
       </div>
     </div>
   </div>
@@ -40,9 +40,9 @@
     <!-- Casa -->
     <div class="score-team-horizontal">
       <span>Casa</span>
-      <div class="score-display" [style.background]="match.firstColor=='azzurro' ? '#30aeea' : '#ffffff'"
-           [style.color]="match.firstColor=='azzurro' ? '#001c37' : '#30aeea'">
-        {{ match.firstScore }}
+      <div class="score-display" [style.background]="match.team1.color=='azzurro' ? '#30aeea' : '#ffffff'"
+           [style.color]="match.team1.color=='azzurro' ? '#001c37' : '#30aeea'">
+        {{ match.team1.score }}
       </div>
       <button class="btn-plus" (click)="scoreFirst(1)">+1</button>
       <button class="btn-minus" (click)="scoreFirst(-1)">-1</button>
@@ -51,9 +51,9 @@
     <!-- Ospiti -->
     <div class="score-team-horizontal">
       <span>Ospiti</span>
-      <div class="score-display" [style.background]="match.firstColor=='azzurro' ? '#ffffff' : '#30aeea'"
-           [style.color]="match.firstColor=='azzurro' ? '#30aeea' : '#001c37'">
-        {{ match.secondScore }}
+      <div class="score-display" [style.background]="match.team2.color=='azzurro' ? '#ffffff' : '#30aeea'"
+           [style.color]="match.team2.color=='azzurro' ? '#30aeea' : '#001c37'">
+        {{ match.team2.score }}
       </div>
       <button class="btn-plus" (click)="scoreSecond(1)">+1</button>
       <button class="btn-minus" (click)="scoreSecond(-1)">-1</button>
@@ -74,7 +74,7 @@
   </div>
 
   <div class="timer-controls">
-    <button class="btn" (click)="playPauseTimer()">{{ match.play ? 'Pausa' : 'Play' }}</button>
+    <button class="btn" (click)="playPauseTimer()">{{ match.timeRunning ? 'Pausa' : 'Play' }}</button>
     <button class="btn" (click)="resetTimer()">Reset</button>
     
       <span>{{ ((match.seconds-match.seconds%60) / 60) | number:'1.0-0' }}:{{ match.seconds%60 | number:'2.0' }}</span>
