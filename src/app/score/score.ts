@@ -18,7 +18,7 @@ export class Score implements OnInit, OnDestroy {
     seconds: 8*60,
     timeRunning: false
   };
-  private socketSub?: Subscription;
+private socketSub?: Subscription;
 
   constructor(private socketService: DasboardSocket, private cdr: ChangeDetectorRef) {}
 

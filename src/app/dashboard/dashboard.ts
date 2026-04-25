@@ -13,6 +13,7 @@ export class Dashboard {
 
 
 
+
   match : Match = {
     team1: {name : 'Team Casa', score: 0, color: 'azzurro'},
     team2: {name : 'Team Ospiti', score: 0, color: 'bianco'},
@@ -131,6 +132,17 @@ export class Dashboard {
     this.stop();
     this.match.seconds = 8*60;
     this.cdr.detectChanges();
+  }
+
+  addTime(arg0: number) {
+    this.match.seconds += arg0;
+    if (this.match.seconds < 0) this.match.seconds = 0;
+    this.cdr.detectChanges();
+    this.dashboardHttp.getPlayPauseTimer(this.match.timeRunning, this.match.seconds).subscribe(response => {
+      console.log('Timer time added successfully:', response);
+    }, error => {
+      console.error('Error adding time to timer:', error);
+    });
   }
 }
 
